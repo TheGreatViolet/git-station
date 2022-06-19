@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Divider, Heading, NativeBaseProvider, Stack, Text } from 'native-base';
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider isSSR>
+      <Stack safeArea pl='2'>
+        <Heading fontSize='3xl' mb='2'>Welcome back {'{user}'}</Heading>
+
+        <Divider />
+
+        <Text>More content here</Text>
+      </Stack>
+    </NativeBaseProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
