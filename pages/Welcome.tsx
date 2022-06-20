@@ -2,6 +2,7 @@ import { DiscoveryDocument, makeRedirectUri, useAuthRequest } from "expo-auth-se
 import { Button, Container, Heading, NativeBaseProvider, Row, Stack, Text } from "native-base";
 import { useEffect } from "react";
 import Icon from 'react-native-vector-icons/Octicons';
+import * as SecureStore from 'expo-secure-store';
 
 const Welcome: React.FC = () => {
   const discoveryDev: DiscoveryDocument = {
@@ -27,9 +28,8 @@ const Welcome: React.FC = () => {
   }
 
   useEffect(() => {
-    console.log(req?.url);
-    if (res) {
-      console.log(res);
+    if (res?.type === 'success') {
+      SecureStore.setItemAsync('token', res.params.code).catch(console.error);
     }
   }, [res]);
 
