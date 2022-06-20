@@ -19,7 +19,7 @@ const Welcome: React.FC = () => {
 
   const [req, res, propmtAsync] = useAuthRequest({
     clientId: __DEV__ ? 'd9c046eee0179d3eb3bb' : 'deac60d4cbe65ec0106e',
-    scopes: ['identity'],
+    scopes: ['identity', 'repo', 'read:org', 'gist', 'notifications', 'user'],
     redirectUri: makeRedirectUri({})
   }, __DEV__ ? discoveryDev : discoveryProd);
 
