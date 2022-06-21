@@ -3,6 +3,7 @@ import { Button, Container, Heading, NativeBaseProvider, Row, Stack, Text } from
 import { useEffect } from "react";
 import Icon from 'react-native-vector-icons/Octicons';
 import * as SecureStore from 'expo-secure-store';
+import { getUserInfo } from "../functions/api";
 
 const Welcome: React.FC = () => {
   const discoveryDev: DiscoveryDocument = {
@@ -28,8 +29,16 @@ const Welcome: React.FC = () => {
   }
 
   useEffect(() => {
+    console.log(res);
+    
     if (res?.type === 'success') {
-      SecureStore.setItemAsync('token', res.params.code).catch(console.error);
+      SecureStore.setItemAsync('token', res.params.code).then(() => {
+        console.log('Token saved');
+        getUserInfo().then(user => {
+          console.log(user);
+        });
+      })
+      .catch(console.error);
     }
   }, [res]);
 
